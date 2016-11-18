@@ -22,8 +22,8 @@ class CartoWatcher extends CartoModel {
     var sql = `
       SELECT
         (CASE
-          WHEN (now() - MAX(ld."${dbcolumn}"))::interval > '${warning} minute'::interval
-            THEN 'warning'
+          WHEN (now() - MAX(ld."${dbcolumn}"))::interval BETWEEN '${warning} minute'::interval
+            AND '${error} minute'::interval THEN 'warning'
           WHEN (now() - MAX(ld."${dbcolumn}"))::interval > '${error} minute'::interval
             THEN 'error'
           ELSE 'ok'
