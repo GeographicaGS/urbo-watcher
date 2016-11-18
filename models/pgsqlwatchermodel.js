@@ -21,19 +21,21 @@ class PGSQLWatcher extends PGSQLModel {
 
     var sql = `
       SELECT
-        CASE
+        (CASE
           WHEN (now() - MAX(ld."${dbcolumn}"))::interval > '${warning} minute'::interval
             THEN 'warning'
           WHEN (now() - MAX(ld."${dbcolumn}"))::interval > '${error} minute'::interval
             THEN 'error'
           ELSE 'ok'
-        END
+        END) as update_state
       FROM "${dbschema}"."${dbtable}" ld`;
 
     return this.promise_query(sql)
     .then(function(results){
 
-      return Promise.resolve(results);
+      results.rows[0].env = 'pgsql';
+
+      return Promise.resolve(results.rows[0]);
     });
   }
 

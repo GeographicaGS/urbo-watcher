@@ -33,10 +33,32 @@ class DBWatcher extends WatcherBase {
 
       return Promise.all(promises)
       .then(function(data){
-        console.log(JSON.stringify(data));
+
+        log.debug(JSON.stringify(data));
 
         var sns = new awsSNS();
-        sns.pushSNS();
+
+        data.forEach(function(dt){
+          if (dt.update_state != 'ok'){
+
+            var subj_imp = dt.update_state == 'warning' ? 'WARNING' : 'ERROR';
+
+            var rep_details = dt.update_state == 'warning' ?
+              schedulerconfig.threshold.warning :
+              schedulerconfig.threshold.error;
+
+            var msg = {
+              subject: `${subj_imp}: ${schedulerconfig.id_watcher}`,
+              report: `\n\nAlarm details:
+              - ${subj_imp} on watcher id "${schedulerconfig.id_watcher}."
+              - More than ${rep_details} minutes without receiving updates.
+              - DB Environment: ${dt.env}.
+              `
+            };
+
+            sns.pushSNS(msg);
+          }
+        })
 
         return data;
       })
