@@ -21,12 +21,12 @@ carto:
   user: XXXXX
 
 watcherSchedule:
-  - id_watcher:
-    table: 'mytable'
-    schema: 'myschema'
-    column: 'TimeInstant'
+  - id_watcher: myidwatcher
+    table: mytable
+    schema: myschema
+    column: TimeInstant
     update_freq: '*/30 * * * *'
-    environment: carto|pgsql|both.
+    environment: carto|pgsql|both
     threshold:
-      - warning: 15
-      - error: 30
+      warning: 15
+      error: 30
