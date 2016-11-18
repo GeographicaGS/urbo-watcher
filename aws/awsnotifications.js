@@ -33,7 +33,7 @@ class AWSNotifications {
     var params = {
         Message: JSON.stringify(payload),
         TopicArn: topicArn,
-        Subject: `[Urbo-Watcher] - ${msg.subject}`,
+        Subject: `[Urbo-Watcher] ${msg.subject}`,
         MessageStructure: 'json'
     };
 

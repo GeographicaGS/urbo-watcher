@@ -15,7 +15,7 @@ pgsql:
   database: urbo
   port: 5432
 
-cartodb:
+carto:
   active: true
   api_key: XXXXXXXXXX
   user: XXXXX
