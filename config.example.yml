@@ -19,7 +19,6 @@ carto:
   active: true
   api_key: XXXXXXXXXX
   user: XXXXX
-  enterprise: true
 
 watcherSchedule:
   - id_watcher:
