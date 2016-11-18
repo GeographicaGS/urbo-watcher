@@ -22,18 +22,18 @@ class AWSNotifications {
     this._sns = new AWS.SNS();
   }
 
-  pushSNS() {
+  pushSNS(msg) {
     var topicArn = this.topic_arn;
 
     var payload = {
-        default: "Urbo-Watcher - default test message",
-        email: "Urbo-Watcher - email test message"
+        default: `Urbo-Watcher report, ${msg.report}`,
+        email: `Urbo-Watcher report, ${msg.report}`
     };
 
     var params = {
         Message: JSON.stringify(payload),
         TopicArn: topicArn,
-        Subject: "Urbo-Watcher - SNS report service",
+        Subject: `[Urbo-Watcher] - ${msg.subject}`,
         MessageStructure: 'json'
     };
 
