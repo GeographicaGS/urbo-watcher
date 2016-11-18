@@ -1,3 +1,4 @@
+'use strict';
 
 var schedule = require('node-schedule');
 var parser = require('cron-parser');
