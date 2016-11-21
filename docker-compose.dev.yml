@@ -6,7 +6,7 @@ postgis:
   volumes:
     - ./:/usr/src
   ports:
-    - "5432:5432"
+    - "5435:5432"
   environment:
     - CREATE_USER=urbo_admin;urbo
     - LOCALE=es_ES
