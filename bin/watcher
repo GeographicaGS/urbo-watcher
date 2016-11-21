@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+'use strict';
+
+/*
+ * Module dependencies
+ */
+var Scheduler = require('../app');
+var config = require('../config');
+var debug = require('debug')('watcher');
+var pg = require('pg');
+
+/*
+ * PGSQL connection retries config
+ */
+var connectRetries = 3;
+var connectRetryTimeout = 3000;
+var connectCount = 1;
+
+// Recursive n retries to connect PGSQL
+var trydb = function(err, client, done) {
+  if (!err) {
+    console.log('* Connected to PGSQL. Launching Server.');
+    start();
+
+  } else {
+    if (connectCount <= connectRetries) {
+      console.log(`* Connecting to PGSQL: ${connectCount}/${connectRetries} ${retries} failed. Waiting ${(connectRetryTimeout / 1000)} seconds...`);
+      connectCount = connectCount + 1;
+
+      setTimeout(function(){
+        pg.connect(config.getData().pgsql, trydb);
+      }, connectRetryTimeout);
+
+    } else {
+      console.log('*** FATAL EROR: Cannot connect to PGSQL.');
+    }
+  }
+};
+/*
+ * Needs to wait the first time (db shutdown while initial error checking process):
+ *   setTimeout(function() {
+ *     pg.connect(config.getData().pgsql, trydb);
+ *   }, connect_retry_timeout);
+ */
+
+/*
+ * The 'app' Scheduler
+ */
+var scheduler = null;
+var start = function() {
+  scheduler = new Scheduler();
+};
+
+/*
+ * Starting urbo-watcher
+ */
+pg.connect(config.getData().pgsql, trydb);
