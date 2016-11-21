@@ -23,7 +23,7 @@ $ cp config.example.yml config.yml
 ```
 
 Set config params:
-```
+```yaml
 logging:  # Logging configuration parameters
   level: DEBUG  # Level options: INFO|ERROR|DEBUG. Default: INFO
   output: console  # Output options: console|file. Default: console
