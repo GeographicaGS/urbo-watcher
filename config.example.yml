@@ -21,12 +21,93 @@ carto:
   user: XXXXX
 
 watcherSchedule:
-  - id_watcher: myidwatcher
-    table: mytable
-    schema: myschema
+  - id_watcher: dumps_wastecontainer
+    table: dumps_wastecontainer_lastdata
+    schema: distrito_telefonica
     column: TimeInstant
-    update_freq: '*/30 * * * *'
-    environment: carto|pgsql|both
+    update_freq: '30 */30 * * * *'
+    environment: both
     threshold:
-      warning: 15
-      error: 30
+      warning: 30
+      error: 65
+  - id_watcher: environment_weatherobserved
+    table: environment_weatherobserved_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '15 */30 * * * *'
+    environment: both
+    threshold:
+      warning: 25
+      error: 50
+  - id_watcher: environment_airqualityobserved
+    table: environment_airqualityobserved_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '25 */30 * * * *'
+    environment: both
+    threshold:
+      warning: 25
+      error: 50
+  - id_watcher: environment_noiseobserved
+    table: environment_noiseobserved_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '35 */30 * * * *'
+    environment: both
+    threshold:
+      warning: 25
+      error: 50
+  - id_watcher: waste_contenedores
+    table: waste_contenedores_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '45 */30 * * * *'
+    environment: both
+    threshold:
+      warning: 25
+      error: 50
+  - id_watcher: lighting_stcabinet
+    table: lighting_stcabinet_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '55 */30 * * * *'
+    environment: both
+    threshold:
+      warning: 25
+      error: 50
+  - id_watcher: parking_offstreetparking
+    table: parking_offstreetparking_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '5 10 * * * *'
+    environment: both
+    threshold:
+      warning: 20
+      error: 80
+  - id_watcher: parking_onstreetparking
+    table: parking_offstreetparking_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '28 11 * * * *'
+    environment: both
+    threshold:
+      warning: 20
+      error: 80
+  - id_watcher: parking_parkinggroup
+    table: parking_parkinggroup_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '22 12 * * * *'
+    environment: both
+    threshold:
+      warning: 20
+      error: 80
+  - id_watcher: parking_parkingspot
+    table: parking_parkingspot_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '38 13 * * *'
+    environment: both
+    threshold:
+      warning: 20
+      error: 80
