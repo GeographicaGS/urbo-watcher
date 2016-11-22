@@ -14,6 +14,13 @@ Debug (live-reload) mode:
 $ npm run-script start-dev
 ```
 
+Docker:
+```
+$ docker build -t geographica/urbo_watcher .
+
+$ docker run -d --name='urbo_watcher' geographica/urbo_watcher npm run-script start
+```
+
 ## Config file
 Config file use [YAML](https://en.wikipedia.org/wiki/YAML) format.
 
