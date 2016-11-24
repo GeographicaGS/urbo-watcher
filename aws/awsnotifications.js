@@ -17,13 +17,16 @@ class AWSNotifications {
       region: cfg.sns_region
     });
 
-    this.topic_arn = cfg.sns_arn
+    this._topic_arn = cfg.sns_arn;
+
+    this._notifs = config.getData().notifications;
 
     this._sns = new AWS.SNS();
   }
 
   pushSNS(msg) {
-    var topicArn = this.topic_arn;
+    var topicArn = this._topic_arn;
+    var notifPrefix = this._notifs.subj_prefix || 'Urbo-Watcher';
 
     var payload = {
         default: `Urbo-Watcher report, ${msg.report}`,
@@ -33,7 +36,7 @@ class AWSNotifications {
     var params = {
         Message: JSON.stringify(payload),
         TopicArn: topicArn,
-        Subject: `[Urbo-Watcher] ${msg.subject}`,
+        Subject: `[${notifPrefix}] ${msg.subject}`,
         MessageStructure: 'json'
     };
 
