@@ -21,7 +21,7 @@ carto:
   user: XXXXX
 
 notifications:
-  prefix: Urbo-Watcher-DEV
+  subj_prefix: Urbo-Watcher-DEV
 
 watcherSchedule:
   - id_watcher: dumps_wastecontainer
