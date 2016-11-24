@@ -20,6 +20,9 @@ carto:
   api_key: XXXXXXXXXX
   user: XXXXX
 
+notifications:
+  prefix: Urbo-Watcher-DEV
+
 watcherSchedule:
   - id_watcher: dumps_wastecontainer
     table: dumps_wastecontainer_lastdata
