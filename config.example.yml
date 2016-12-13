@@ -57,8 +57,8 @@ watcherSchedule:
     update_freq: '30 */30 * * * *'
     environment: both
     threshold:
-      warning: 30000
-      error: 650000
+      warning: 30
+      error: 65
   - id_watcher: environment_weatherobserved
     table: environment_weatherobserved_lastdata
     schema: distrito_telefonica
