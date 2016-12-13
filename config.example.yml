@@ -24,6 +24,32 @@ notifications:
   subj_prefix: Urbo-Watcher-DEV
 
 watcherSchedule:
+logging:  # Logging configuration parameters
+  level: DEBUG  # Level options: INFO|ERROR|DEBUG. Default: INFO
+  output: console  # Output options: console|file. Default: console
+
+aws:
+  aws_key: xxxxxxxxxxxxxxxx
+  aws_secret: xxxxxxxxxx
+  sns_region: xxxxxxxxxxx
+  sns_arn: xxxxxxxxx
+
+pgsql:
+  host: postgis
+  user: urbo_admin
+  password: urbo
+  database: urbo
+  port: 5432
+
+carto:
+  active: true
+  api_key: XXXXXXXXXX
+  user: XXXXX
+
+notifications:
+  subj_prefix: Urbo-Watcher-DEV
+
+watcherSchedule:
   - id_watcher: dumps_wastecontainer
     table: dumps_wastecontainer_lastdata
     schema: distrito_telefonica
@@ -31,8 +57,8 @@ watcherSchedule:
     update_freq: '30 */30 * * * *'
     environment: both
     threshold:
-      warning: 30
-      error: 65
+      warning: 30000
+      error: 650000
   - id_watcher: environment_weatherobserved
     table: environment_weatherobserved_lastdata
     schema: distrito_telefonica
@@ -114,3 +140,48 @@ watcherSchedule:
     threshold:
       warning: 20
       error: 80
+  - id_watcher: dumps_emptyings
+    table: dumps_emptyings
+    schema: distrito_telefonica
+    column: dateemptying
+    update_freq: '45 0 0,2,20,22 * *'
+    environment: both
+    threshold:
+      warning: 30
+      error: 80
+  - id_watcher: dumps_filling_agg
+    table: dumps_fillingagg
+    schema: distrito_telefonica
+    column: day
+    update_freq: '40 0 30 * *'
+    environment: carto
+    threshold:
+      warning: 150
+      error: 160
+  - id_watcher: environment_aqobserved_agg
+    table: environment_aqobserved_measurand_agg
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '50 0 30 * *'
+    environment: carto
+    threshold:
+      warning: 150
+      error: 160
+  - id_watcher: parking_offstreetparking_agg_hour
+    table: parking_offstreetparking_agg_hour
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '12 15 * * *'
+    environment: both
+    threshold:
+      warning: 30
+      error: 100
+  - id_watcher: parking_offstreetparking_agg_day
+    table: parking_offstreetparking_agg_day
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '10 0 30 * *'
+    environment: both
+    threshold:
+      warning: 150
+      error: 160
