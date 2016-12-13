@@ -174,8 +174,8 @@ watcherSchedule:
     update_freq: '12 15 * * * *'
     environment: both
     threshold:
-      warning: 30
-      error: 100
+      warning: 80
+      error: 150
   - id_watcher: parking_offstreetparking_agg_day
     table: parking_offstreetparking_agg_day
     schema: distrito_telefonica
