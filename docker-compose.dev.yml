@@ -1,12 +1,11 @@
 postgis:
   image: geographica/postgis:awkward_aardvark
-  #image: geographica/postgis-fdw-mysql
   volumes_from:
     - urbo_pgdata
   volumes:
     - ./:/usr/src
   ports:
-    - "5432:5432"
+    - "5435:5432"
   environment:
     - CREATE_USER=urbo_admin;urbo
     - LOCALE=es_ES
@@ -14,9 +13,6 @@ postgis:
 watcher:
   build: .
   dockerfile: Dockerfile
-  ports:
-    - "3050:3000"
-    - "8090:8080"
   links:
     - postgis:postgis
 
