@@ -24,32 +24,6 @@ notifications:
   subj_prefix: Urbo-Watcher-DEV
 
 watcherSchedule:
-logging:  # Logging configuration parameters
-  level: DEBUG  # Level options: INFO|ERROR|DEBUG. Default: INFO
-  output: console  # Output options: console|file. Default: console
-
-aws:
-  aws_key: xxxxxxxxxxxxxxxx
-  aws_secret: xxxxxxxxxx
-  sns_region: xxxxxxxxxxx
-  sns_arn: xxxxxxxxx
-
-pgsql:
-  host: postgis
-  user: urbo_admin
-  password: urbo
-  database: urbo
-  port: 5432
-
-carto:
-  active: true
-  api_key: XXXXXXXXXX
-  user: XXXXX
-
-notifications:
-  subj_prefix: Urbo-Watcher-DEV
-
-watcherSchedule:
   - id_watcher: dumps_wastecontainer
     table: dumps_wastecontainer_lastdata
     schema: distrito_telefonica
