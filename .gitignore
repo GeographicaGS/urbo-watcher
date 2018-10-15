@@ -51,4 +51,4 @@ package-lock.json
 
 # IDE/Text editors
 .vscode
-
+.jsconfig.json
