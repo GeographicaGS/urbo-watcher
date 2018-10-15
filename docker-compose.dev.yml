@@ -1,31 +1,19 @@
-postgis:
-  image: geographica/postgis:awkward_aardvark
-  volumes_from:
-    - urbo_pgdata
-  volumes:
-    - ./:/usr/src
-  ports:
-    - "5435:5432"
-  environment:
-    - CREATE_USER=urbo_admin;urbo
-    - LOCALE=es_ES
+version: "3"
 
-watcher:
-  build: .
-  dockerfile: Dockerfile
-  links:
-    - postgis:postgis
+services:
+  watcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.new
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    ports:
+      - "3005:3000"
+      - "9229:9229"
+    command: npm run-script start-dev
+    network_mode: bridge
+    restart: unless-stopped
 
-  # Dev values
-  volumes:
-    - ./:/usr/src/app
-
-  # For debugging mode:
-  # command: npm run-script debug
-  #   ... then go to http://127.0.0.1:8081/?port=5858
-
-  # Standard mode:
-  # command: npm run-script start
-
-  # Livereload mode
-  command: npm run-script start-dev
+volumes:
+  node_modules:
