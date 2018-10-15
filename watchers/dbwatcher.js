@@ -2,7 +2,8 @@
 var WatcherBase = require('./watcherbase');
 var PGSQLWatcherModel = require('../models/pgsqlwatchermodel');
 var CartoWatcherModel = require('../models/cartowatchermodel');
-var awsSNS = require('../aws/awsnotifications');
+var awsSNS = require('../senders/awssns');
+var stmpSender = require('../senders/stmp');
 var utils = require('../utils');
 var log = utils.log();
 
