@@ -1,6 +1,6 @@
 # URBO-WATCHER
 
-Urbo watcher module.
+Urbo watcher module. This module automatically sends a warning or error message when the data is not saved in our databases (Geographic and Carto ones). When a database doesn't save information in a logic amount of time (that depends on the provider and should be configured) warnings (first) and errors (after when the time configured is exceeded) are sent.
 
 ## Run
 
@@ -29,31 +29,32 @@ Preparing file:
 $ cp config.example.yml config.yml
 ```
 
-Set config params:
+Set config params (example):
+
 ```yaml
 logging:  # Logging configuration parameters
   level: DEBUG  # Level options: INFO|ERROR|DEBUG. Default: INFO
   output: console  # Output options: console|file. Default: console
 
-aws:
+aws: # AWS configuration parameters
   aws_key: xxxxxxxxxxxxxxxx
   aws_secret: xxxxxxxxxx
   sns_region: xxxxxxxxxxx
   sns_arn: xxxxxxxxx
 
-pgsql:
+pgsql: # Historical Database configuration
   host: postgis
   user: urbo_admin
   password: urbo
   database: urbo
   port: 5432
 
-carto:
+carto: # Carto connection configuration
   active: true
   api_key: XXXXXXXXXX
   user: XXXXX
 
-watcherSchedule:
+watcherSchedule: # Watchers configurations. Could be as many as necessary.
   - id_watcher: myidwatcher
     table: mytable
     schema: myschema
@@ -64,3 +65,7 @@ watcherSchedule:
       warning: 15
       error: 30
 ```
+
+### MAC localhost error with Docker
+
+Maybe configuring localhost at pgsql using Docker in conjuntion with MAC you could find a problem. In that case, use `docker.for.mac.localhost` as host of the pgsql configuration. 
