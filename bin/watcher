@@ -16,6 +16,7 @@ var pg = require('pg');
 var connectRetries = 3;
 var connectRetryTimeout = 3000;
 var connectCount = 1;
+var retries = 4;
 
 // Recursive n retries to connect PGSQL
 var trydb = function(err, client, done) {
