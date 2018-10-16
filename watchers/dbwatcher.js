@@ -4,18 +4,17 @@ var config = require('../config');
 var PGSQLWatcherModel = require('../models/pgsqlwatchermodel');
 var CartoWatcherModel = require('../models/cartowatchermodel');
 var awsSNS = require('../senders/awssns');
-var stmpSender = require('../senders/stmp');
+var emailSender = require('../senders/email');
 var utils = require('../utils');
 var log = utils.log();
 
+var activeServices = config.getData().activeServices;  
 
 class DBWatcher extends WatcherBase {
 
   constructor() {
-    var activeServices = config.getData().activeServices;  
+    super();
   }
-
-
 
   run(schedulerconfig, cartoactive) {
     this.startWatcher(schedulerconfig.update_freq, function(){
@@ -58,14 +57,16 @@ class DBWatcher extends WatcherBase {
               `
             };
 
+            // Amazon SNS Service
             if (activeServices.awsSNS == true ){
               var sns = new awsSNS();
               sns.pushSNS(msg);
             }
  
+            // Email Sender Service
             if (activeServices.email == true ){
-              var email = new stmpSender();
-              sns.sendMail(msg);
+              var email = new emailSender();
+              email.sendMail(msg);
             }
 
           }
