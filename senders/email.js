@@ -1,3 +1,5 @@
+import { debug } from 'util';
+
 'use strict';
 
 var nodemailer = require('nodemailer');
@@ -12,13 +14,14 @@ class EmailSender {
 
     this._transporter = new nodemailer.createTransport({
       host: ecfg.server_address,
-      port: ecfg.secure ? ecfg.ssl_port : ecfg.ttl_port,
-      secure: ecfg.secure, // using SSL at port 465, false for other ports or TTL
+      port: ecfg.port,
+      secure: ecfg.secure, 
       auth: {
         user: ecfg.user,
         pass: ecfg.password
       }
     });
+    // remember set it true for port 465, false for other ports
  
     this._receivers = ecfg.receivers;
 
@@ -50,10 +53,11 @@ class EmailSender {
           return console.log(error);
       }
 
-      console.log('Message sent: %s', info.messageId);
+      log.debug('Message sent: %s', info.messageId);
+      
 
       // Preview only available when sending through an Ethereal account
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      log.debug('Preview URL: %s', nodemailer.getTestMessageUrl(info));
       // Example log: 
       // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
       // Example: Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
