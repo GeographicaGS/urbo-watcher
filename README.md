@@ -1,6 +1,6 @@
 # URBO-WATCHER
 
-Urbo watcher module. This module automatically sends a warning or error message when the data is not saved in our databases (Geographic and Carto ones). When a database doesn't save information in a logic amount of time (that depends on the provider and should be configured) warnings (first) and errors (after when the time configured is exceeded) are sent.
+Urbo watcher module. This module automatically sends a warning or error message when the data is not saved in our databases (Geographic and Carto ones). When the information is not saved in a logic amount of time (that depends on the provider and should be configured) warnings (first) and errors (after when the time configured is exceeded) are sent.
 
 ## Run
 
