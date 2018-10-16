@@ -13,5 +13,14 @@ services:
     command: npm run-script start-dev
     restart: unless-stopped
 
+  # https://hub.docker.com/r/dockage/mailcatcher/
+  # ref internally here: wget https://raw.githubusercontent.com/dockage/mailcatcher/master/docker-compose.yml
+  mailcatcher:
+    restart: always
+    image: dockage/mailcatcher:0.6.5
+    ports:
+    - "1080:1080"
+    - "1025:1025"    
+
 volumes:
   node_modules:
