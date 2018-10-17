@@ -19,7 +19,6 @@ class EmailSender {
         pass: this._ecfg.password
       }
     };       
-    this._receivers = this._ecfg.receivers.replace("[", "").replace("]", "").split(",");
     this._notifs = config.getData().notifications;
     this._transporter = nodemailer.createTransport(this._mailConfig);
 
@@ -31,7 +30,7 @@ class EmailSender {
 
     var mailOptions = {
       subject: `[${notifPrefix}] ${msg.subject}`,
-      html: JSON.stringify(payload),
+      html: JSON.parse(JSON.stringify(payload)),
       from: notifPrefix,
       to: this._ecfg.receivers
     };
