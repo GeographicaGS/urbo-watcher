@@ -28,7 +28,7 @@ class DBWatcher extends WatcherBase {
         var pgsqlmodel = new PGSQLWatcherModel();
         promises.push(pgsqlmodel.checkLastData(schedulerconfig));
       }
-
+      
       if (cartoactive && (sch_env == 'carto' || sch_env == 'both')){
         var cartomodel = new CartoWatcherModel();
         promises.push(cartomodel.checkLastData(schedulerconfig))
@@ -66,7 +66,7 @@ class DBWatcher extends WatcherBase {
             // Email Sender Service
             if (activeServices.email == true ){
               var email = new emailSender();
-              email.sendMail(msg);
+              email.pushMail(msg);
             }
 
           }
