@@ -4,13 +4,15 @@ services:
   watcher:
     build:
       context: .
+      dockerfile: Dockerfile.new
     volumes:
       - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules
     ports:
+      - "3005:3000"
       - "9229:9229"
-    network_mode: bridge
     command: npm run-script start-dev
+    network_mode: bridge
     restart: unless-stopped
 
   # https://hub.docker.com/r/dockage/mailcatcher/
@@ -21,6 +23,7 @@ services:
     ports:
     - "1080:1080"
     - "1025:1025"    
+    
 
 volumes:
   node_modules:

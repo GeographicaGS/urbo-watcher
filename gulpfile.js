@@ -18,20 +18,11 @@ gulp.task('start', function() {
   });
 });
 
-gulp.task('default', ['start']);
-
-// clean up if an error goes unhandled.
-process.on('exit', function() {
-  if (node) {
-    node.kill()
-  }
-});
-
 gulp.task('debug', function() {
   if (node) {
     node.kill('SIGKILL');
   }
-  node = spawn('node', ['--inspect', '--debug-brk', './bin/watcher'], {stdio: 'inherit'});
+  node = spawn('node', ['--inspect=0.0.0.0:9229', '--debug-brk', './bin/watcher'], {stdio: 'inherit'});
   node.on('close', function(code) {
     if (code === 8) {
       gulp.log('Error detected, waiting for changes...');
@@ -44,4 +35,13 @@ gulp.task('start-dev', ['debug'], function () {
   watch('./**/*.js', batch(function(events, done) {
     gulp.start('debug', done);
   }));
+});
+
+gulp.task('default', ['start']);
+
+// clean up if an error goes unhandled.
+process.on('exit', function() {
+  if (node) {
+    node.kill()
+  }
 });
