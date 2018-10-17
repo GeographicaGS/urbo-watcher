@@ -1,10 +1,19 @@
-# urbo-watcher specific
+# urbo-watcher Project specific
+*.private.*
+tmp/
 config.yml
+deploy.sh
+
+# OSs
+.DS_Store
 
 # Logs
 logs
 *.log
 npm-debug.log*
+
+# Optional REPL history
+.node_repl_history
 
 # Runtime data
 pids
@@ -29,15 +38,17 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
+# Node
 node_modules
 jspm_packages
+package-lock.json
+
+# IDE/Text editors
+.vscode
 
 # Optional npm cache directory
 .npm
 
-# Optional REPL history
-.node_repl_history
-
-# Garbage
-.DS_Store
+# IDE/Text editors
+.vscode
+.jsconfig.json

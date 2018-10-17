@@ -6,7 +6,7 @@ var utils = require('../utils');
 var log = utils.log();
 
 
-class AWSNotifications {
+class AWSSNS {
 
   constructor() {
     var cfg = config.getData().aws;
@@ -54,4 +54,4 @@ class AWSNotifications {
 
 }
 
-module.exports = AWSNotifications;
+module.exports = AWSSNS;
