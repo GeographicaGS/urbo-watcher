@@ -1,11 +1,14 @@
 
 var WatcherBase = require('./watcherbase');
+var config = require('../config');
 var PGSQLWatcherModel = require('../models/pgsqlwatchermodel');
 var CartoWatcherModel = require('../models/cartowatchermodel');
-var awsSNS = require('../aws/awsnotifications');
+var awsSNS = require('../senders/awssns');
+var emailSender = require('../senders/email');
 var utils = require('../utils');
 var log = utils.log();
 
+var activeServices = config.getData().activeServices;  
 
 class DBWatcher extends WatcherBase {
 
@@ -25,7 +28,7 @@ class DBWatcher extends WatcherBase {
         var pgsqlmodel = new PGSQLWatcherModel();
         promises.push(pgsqlmodel.checkLastData(schedulerconfig));
       }
-
+      
       if (cartoactive && (sch_env == 'carto' || sch_env == 'both')){
         var cartomodel = new CartoWatcherModel();
         promises.push(cartomodel.checkLastData(schedulerconfig))
@@ -35,8 +38,6 @@ class DBWatcher extends WatcherBase {
       .then(function(data){
 
         log.debug(JSON.stringify(data));
-
-        var sns = new awsSNS();
 
         data.forEach(function(dt){
           if (dt.update_state != 'ok'){
@@ -56,7 +57,18 @@ class DBWatcher extends WatcherBase {
               `
             };
 
-            sns.pushSNS(msg);
+            // Amazon SNS Service
+            if (activeServices.awsSNS == true ){
+              var sns = new awsSNS();
+              sns.pushSNS(msg);
+            }
+ 
+            // Email Sender Service
+            if (activeServices.email == true ){
+              var email = new emailSender();
+              email.pushMail(msg);
+            }
+
           }
         })
 
