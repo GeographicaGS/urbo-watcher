@@ -36,6 +36,20 @@ logging:  # Logging configuration parameters
   level: DEBUG  # Level options: INFO|ERROR|DEBUG. Default: INFO
   output: console  # Output options: console|file. Default: console
 
+email: # Email Service parameters
+  server_address: smtp.xxxxxxx.xxxxxxx
+  port: 587 # example port
+  secure: false # true for 465, false for other ports
+  user: user@example.com
+  password: xxxxxxxxxxxxxx
+  receivers: [
+    receiver1@example.com,
+    receiver2@example.com,
+    receiver3@example.com,
+    receiver4@example.com,
+    receivern@example.com
+  ]  
+
 aws: # AWS configuration parameters
   aws_key: xxxxxxxxxxxxxxxx
   aws_secret: xxxxxxxxxx
