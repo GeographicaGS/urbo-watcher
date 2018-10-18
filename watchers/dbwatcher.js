@@ -51,7 +51,7 @@ class DBWatcher extends WatcherBase {
             var msg = {
               subject: `${subj_imp}: ${schedulerconfig.id_watcher}`,
               report: `\n\nAlarm details:
-              - ${subj_imp} on watcher id "${schedulerconfig.id_watcher}."
+              - ${subj_imp} on watcher id '${schedulerconfig.id_watcher}.'
               - More than ${rep_details} minutes without receiving updates.
               - DB Environment: ${dt.env}.
               `
