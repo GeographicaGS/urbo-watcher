@@ -26,7 +26,7 @@ class EmailSender {
 
   pushMail(msg) {
     var notifPrefix = this._notifs.subj_prefix || 'Urbo-Watcher';
-    var email_address = this._notifs.email_address || 'watcher@urbo.info';
+    var email_address = this._ecfg.sender || 'watcher@urbo.info';
     var payload = `Urbo-Watcher report, ${msg.report}`;
 
     var mailOptions = {
