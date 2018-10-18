@@ -68,6 +68,10 @@ carto: # Carto connection configuration
   api_key: XXXXXXXXXX
   user: XXXXX
 
+notifications: # Messages Prefix and Sender Mail Address
+  subj_prefix: Urbo-Watcher
+  email_address: watcher@urbo.info  
+
 watcherSchedule: # Watchers configurations. Could be as many as necessary.
   - id_watcher: myidwatcher
     table: mytable
