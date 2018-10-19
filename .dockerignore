@@ -1,19 +1,9 @@
-# urbo-watcher Project specific
-*.private.*
-tmp/
-config.yml
-deploy.sh
-
 # OSs
 .DS_Store
 
 # Logs
-logs
+logs/
 *.log
-npm-debug.log*
-
-# Optional REPL history
-.node_repl_history
 
 # Runtime data
 pids
@@ -26,29 +16,24 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# nyc test coverage
-.nyc_output
-
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
-
-# node-waf configuration
-.lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
 # Node
 node_modules
-jspm_packages
-package-lock.json
 
-# IDE/Text editors
+# Users Environment Variables
+.lock-wscript
+
+# Project
+*.private.*
+tmp/
+Icon
+db-config.env
+deploy.sh
+.git
+[dD]ocker*
 .vscode
-
-# Optional npm cache directory
-.npm
-
-# IDE/Text editors
-.vscode
-.jsconfig.json

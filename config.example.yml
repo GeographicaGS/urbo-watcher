@@ -2,6 +2,19 @@ logging:  # Logging configuration parameters
   level: DEBUG  # Level options: INFO|ERROR|DEBUG. Default: INFO
   output: console  # Output options: console|file. Default: console
 
+activeServices:
+  aws: false
+  email: false
+
+email: 
+  server_address: xxxxxxxxxxxxxxxx
+  sender: xxxxxxxxxxxxxxxx
+  port: 587
+  secure: false  
+  user: xxxxxxxxxxxxxxxx
+  password: xxxxxxxxxxxxxxxx
+  receivers: [user1@example.com, user2@example.com, usern@example.com]
+
 aws:
   aws_key: xxxxxxxxxxxxxxxx
   aws_secret: xxxxxxxxxx
@@ -155,6 +168,33 @@ watcherSchedule:
     schema: distrito_telefonica
     column: TimeInstant
     update_freq: '10 30 0 * * *'
+    environment: both
+    threshold:
+      warning: 1590
+      error: 1600
+  - id_watcher: transport_trafficflowobserved
+    table: transport_trafficflowobserved_lastdata
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '19 */5 * * * *'
+    environment: both
+    threshold:
+      warning: 10
+      error: 40
+  - id_watcher: transport_trafficflowobserved_agg_hour
+    table: transport_trafficflowobserved_agg_hour
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '24 19 * * * *'
+    environment: both
+    threshold:
+      warning: 150
+      error: 200
+  - id_watcher: transport_trafficflowobserved_agg_day
+    table: transport_trafficflowobserved_agg_day
+    schema: distrito_telefonica
+    column: TimeInstant
+    update_freq: '29 19 0 * * *'
     environment: both
     threshold:
       warning: 1590
