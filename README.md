@@ -37,7 +37,7 @@ logging:  # Logging configuration parameters
   output: console  # Output options: console|file. Default: console
 
 activeServices:
-  aws: false
+  awsSNS: false
   email: true
 
 email: # Email Service parameters
